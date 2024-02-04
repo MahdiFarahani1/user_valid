@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class ConstWidgets {
+  static final ConstWidgets _instance = ConstWidgets._internal();
+  factory ConstWidgets() => _instance;
+  ConstWidgets._internal();
+
   static Widget space(double val) {
     return Gap.expand(val);
   }

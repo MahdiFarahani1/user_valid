@@ -1,3 +1,4 @@
+import 'package:bottom_bar_matu/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_valid/auth_feature/data_sourse/model/model-send-user.dart';
@@ -115,7 +116,7 @@ class SignUp extends StatelessWidget {
                           if (await apiProvider.sendUser(User(
                               username: textUser.text,
                               password: textpass.text,
-                              phone: textphone.text,
+                              phone: textphone.text.toInt(),
                               email: textemail.text))) {
                             // ignore: use_build_context_synchronously
                             Navigator.pushNamed(context, Person.rn, arguments: {

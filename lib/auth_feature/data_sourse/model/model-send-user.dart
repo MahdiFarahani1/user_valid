@@ -1,7 +1,7 @@
 class User {
   String username;
   String password;
-  String phone;
+  int phone;
   String email;
 
   User({

@@ -2,8 +2,10 @@ import 'package:bottom_bar_matu/bottom_bar/bottom_bar_bubble.dart';
 import 'package:bottom_bar_matu/bottom_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:user_valid/auth_feature/pages/bloc/cubit_bot_nav/nav_cubit.dart';
 import 'package:user_valid/auth_feature/pages/home.dart';
+import 'package:user_valid/auth_feature/pages/person.dart';
 import 'package:user_valid/auth_feature/pages/signHome.dart';
 
 class MainWrapper extends StatelessWidget {
@@ -11,12 +13,17 @@ class MainWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final storage = GetStorage();
+    final islogin = storage.read("login") ?? false;
     return BlocBuilder<NavCubit, NavState>(
       builder: (context, state) {
         return Scaffold(
           body: PageView(
             controller: state.controller,
-            children: const [Home(), SingHome()],
+            children: [
+              const Home(),
+              islogin ? const Person() : const SingHome()
+            ],
           ),
           bottomNavigationBar: Directionality(
             textDirection: TextDirection.rtl,

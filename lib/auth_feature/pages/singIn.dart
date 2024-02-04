@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:user_valid/auth_feature/data_sourse/remote/send_user.dart';
 import 'package:user_valid/auth_feature/pages/bloc/cubit-login-text/textlogin_cubit.dart';
 import 'package:user_valid/auth_feature/pages/person.dart';
+import 'package:user_valid/auth_feature/repositoreis/storage.dart';
 
 import 'package:user_valid/auth_feature/repositoreis/validation_form.dart';
 import 'package:user_valid/widgets/const_widgets.dart';
@@ -91,14 +92,21 @@ class SingIn extends StatelessWidget {
 
                         if (formkey1.currentState!.validate()) {
                           ApiProvider apiProvider = ApiProvider();
-                          if (await apiProvider.checkUser(
-                              username: textUser.text,
-                              password: textpass.text)) {
+                          var res = await apiProvider.checkUser(
+                              username: textUser.text, password: textpass.text);
+
+                          if (res != null) {
+                            ManageStorage manageStorage = ManageStorage();
+                            manageStorage.login();
+                            manageStorage.saveUser(
+                                username: res.username,
+                                email: res.email,
+                                phone: res.phone.toString());
                             // ignore: use_build_context_synchronously
                             Navigator.pushNamed(context, Person.rn, arguments: {
                               "username": textUser.text,
-                              "email": "textemail.text",
-                              "phone": "textphone.text",
+                              "email": res.email,
+                              "phone": res.phone,
                             });
                             // ignore: use_build_context_synchronously
                             WidgetsCustom.sncakbar(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:user_valid/auth_feature/pages/bloc/cubit-login-text/textlogin_cubit.dart';
 import 'package:user_valid/auth_feature/pages/bloc/cubit_bot_nav/nav_cubit.dart';
 import 'package:user_valid/auth_feature/pages/bloc/cubit_visit_text/visit_text_cubit.dart';
@@ -9,7 +10,8 @@ import 'package:user_valid/auth_feature/pages/signHome.dart';
 import 'package:user_valid/auth_feature/pages/signUp.dart';
 import 'package:user_valid/auth_feature/pages/singIn.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
